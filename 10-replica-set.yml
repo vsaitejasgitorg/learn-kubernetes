@@ -19,3 +19,16 @@ spec:
       containers:
         - name: nginx
           image: nginx:1.24
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p3
+  labels:
+    project: example
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
