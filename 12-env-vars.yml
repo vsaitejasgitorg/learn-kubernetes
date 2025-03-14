@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: envar-demo-container
-      image: gcr.io/google-samples/hello-app:2.0
+      image: docker.io/rkalluru/learnk8s:rhel9-bare
       env:
         - name: DEMO_GREETING
           value: "Hello from the environment"
