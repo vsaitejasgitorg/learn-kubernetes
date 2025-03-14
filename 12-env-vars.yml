@@ -1,3 +1,4 @@
+#Environamnet Variables
 apiVersion: v1
 kind: Pod
 metadata:
