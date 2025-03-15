@@ -30,3 +30,19 @@ spec:
   containers:
     - name: debug
       image: docker.io/rkalluru/learnk8s:rhel9-bare
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sample
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: sample
+spec:
+  containers:
+    - name: debug
+      image: docker.io/rkalluru/learnk8s:rhel9-bare
