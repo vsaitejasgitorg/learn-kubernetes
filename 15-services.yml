@@ -46,3 +46,17 @@ spec:
   containers:
     - name: debug
       image: docker.io/rkalluru/learnk8s:rhel9-bare
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-np
+spec:
+  type: NodePort
+  selector:
+    appName: nginx
+  ports:
+    - port: 80 # service port
+      targetPort: 80 # nginx pod port
+---
