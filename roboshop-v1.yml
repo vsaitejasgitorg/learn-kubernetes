@@ -173,3 +173,36 @@ spec:
             - configMapRef:
                 name: payment
 ---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user
+data:
+  MONGO: "true"
+  MONGO_URL: "mongodb://mongodb-dev.saitejasroboshop.store:27017/users"
+  REDIS_URL: "redis://redis-dev.saitejasroboshop.store:6379"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    component: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: user
+  template:
+    metadata:
+      labels:
+        component: user
+    spec:
+      containers:
+        - name: payment
+          image: public.ecr.aws/w8x4g9h7/roboshop-v3/user
+          envFrom:
+            - configMapRef:
+                name: user
+---
