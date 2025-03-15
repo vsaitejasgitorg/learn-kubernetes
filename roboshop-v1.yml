@@ -46,7 +46,7 @@ metadata:
   name: catalogue
 data:
   MONGO: "true"
-  MONGO_URL: "mongodb://mongodb-dev.rdevopsb83.online:27017/catalogue"
+  MONGO_URL: "mongodb://mongodb-dev.saitejasroboshop.store:27017/catalogue"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -70,5 +70,38 @@ spec:
           envFrom:
             - configMapRef:
                 name: catalogue
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart
+data:
+  CATALOGUE_HOST: "localhost"
+  CATALOGUE_PORT: "8080"
+  REDIS_HOST: "redis-dev.saitejasroboshop.store"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  labels:
+    component: cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: cart
+  template:
+    metadata:
+      labels:
+        component: cart
+    spec:
+      containers:
+        - name: cart
+          image: public.ecr.aws/w8x4g9h7/roboshop-v3/cart
+          envFrom:
+            - configMapRef:
+                name: cart
 
 ---
