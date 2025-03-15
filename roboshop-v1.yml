@@ -4,15 +4,15 @@ kind: ConfigMap
 metadata:
   name: frontend
 data:
-  CATALOGUE_HOST: "localhost"
+  CATALOGUE_HOST: "catalogue"
   CATALOGUE_PORT: "8080"
-  USER_HOST: "localhost"
+  USER_HOST: "user"
   USER_PORT: "8080"
-  CART_HOST: "localhost"
+  CART_HOST: "cart"
   CART_PORT: "8080"
-  SHIPPING_HOST: "localhost"
+  SHIPPING_HOST: "shipping"
   SHIPPING_PORT: "8080"
-  PAYMENT_HOST: "localhost"
+  PAYMENT_HOST: "payment"
   PAYMENT_PORT: "8080"
 
 ---
@@ -77,7 +77,7 @@ kind: ConfigMap
 metadata:
   name: cart
 data:
-  CATALOGUE_HOST: "localhost"
+  CATALOGUE_HOST: "catalogue"
   CATALOGUE_PORT: "8080"
   REDIS_HOST: "redis-dev.saitejasroboshop.store"
 ---
@@ -110,7 +110,7 @@ kind: ConfigMap
 metadata:
   name: shipping
 data:
-  CART_ENDPOINT: "localhost:8080"
+  CART_ENDPOINT: "cart:8080"
   DB_HOST: "mysql-dev.saitejasroboshop.store"
 ---
 apiVersion: apps/v1
@@ -142,9 +142,9 @@ kind: ConfigMap
 metadata:
   name: payment
 data:
-  CART_HOST: "localhost"
+  CART_HOST: "cart"
   CART_PORT: "8080"
-  USER_HOST: "localhost"
+  USER_HOST: "user"
   USER_PORT: "8080"
   AMQP_HOST: "rabbitmq-dev.saitejasroboshop.store"
   AMQP_USER: "roboshop"
@@ -205,4 +205,81 @@ spec:
           envFrom:
             - configMapRef:
                 name: user
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    component: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue
+spec:
+  type: ClusterIP
+  selector:
+    component: catalogue
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+spec:
+  type: ClusterIP
+  selector:
+    component: cart
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+spec:
+  type: ClusterIP
+  selector:
+    component: user
+  ports:
+    - port: 8080
+      targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: shipping
+spec:
+  type: ClusterIP
+  selector:
+    component: shipping
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+spec:
+  type: ClusterIP
+  selector:
+    component: payment
+  ports:
+    - port: 8080
+      targetPort: 8080
+
 ---
