@@ -136,3 +136,40 @@ spec:
             - configMapRef:
                 name: shipping
 ---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment
+data:
+  CART_HOST: "localhost"
+  CART_PORT: "8080"
+  USER_HOST: "localhost"
+  USER_PORT: "8080"
+  AMQP_HOST: "rabbitmq-dev.saitejasroboshop.store"
+  AMQP_USER: "roboshop"
+  AMQP_PASS: "roboshop123"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  labels:
+    component: payment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: payment
+  template:
+    metadata:
+      labels:
+        component: payment
+    spec:
+      containers:
+        - name: payment
+          image: public.ecr.aws/w8x4g9h7/roboshop-v3/payment
+          envFrom:
+            - configMapRef:
+                name: payment
+---
