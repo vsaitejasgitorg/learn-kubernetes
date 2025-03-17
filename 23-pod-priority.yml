@@ -6,7 +6,7 @@ metadata:
     project: example
     app: nginx
 spec:
-  replicas: 20
+  replicas: 10
   selector:
     matchLabels:
       app: nginx
