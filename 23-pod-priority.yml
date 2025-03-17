@@ -26,3 +26,19 @@ spec:
               memory: "128Mi"
               cpu: "500m"
 ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-no-priority
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "200m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+---
