@@ -7,3 +7,16 @@ spec:
     - name: nginx
       image: nginx
 ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-tolerated
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "roboshop"
+      effect: "NoExecute"
