@@ -5,7 +5,7 @@ metadata:
 parameters:
   fsType: xfs
   type: gp3
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 ---
