@@ -5,5 +5,5 @@ metadata:
    name: helm-1
 data:
    name: Hello
-#   release-name: {{ .Release.Name }}
+   release-name: {{ .Release.Name }}
 
