@@ -33,3 +33,13 @@ metadata:
    name: helm-1
 data:
    cluster-ip: {{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
+
+
+NOTES.txt:
+----
+
+{{- range $k, $v := (lookup "v1" "Service" "default" "kubernetes").spec }}
+{{ $v }}
+{{- end }}
+
+{{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
