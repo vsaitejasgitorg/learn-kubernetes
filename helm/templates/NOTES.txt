@@ -1,9 +1,7 @@
 We have installed the following YAML files in Cluster
 
 ------
-{{- range $k, $v := (lookup "v1" "Service" "default" "kubernetes").spec }}
-{{ $v }}
+{{- with .Values.course }}
+name: {{ .name | quote }}
+trainer: {{ .trainer | quote }}
 {{- end }}
-
-{{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
-------
