@@ -1,28 +1,35 @@
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#   name: helm-1
+#data:
+#   name: Hello
+#   release-name: {{ .Release.Name }}
+#   chart-version: {{ .Chart.Version }}
+#   file-size: {{ .Files.GetBytes "test.txt" }}
+#   file-content: |
+#     {{ .Files.Lines "test.txt" }}
+#   #kubernetes-version: {{ .Capabilities.KubeVersion.Minor }}
+#   kubernetes-version: {{ .Capabilities.KubeVersion.Major }}
+#   filename: {{ .Template.Name }}
+#   x: {{ quote .Values.x }}
+#   env: {{ .Values.env }}
+#   drink: {{ .Values.drink | default (printf "%s-tea" "Hello") }}
+#   pods: |
+#     {{- if (lookup "v1" "Service" "default" "kubernetes") }}
+#       "yes"
+#     {{ else }}
+#       "not"
+#     {{- end }}
+#
+#   test: {{ .Values.drink | default (printf "%s-tea" (lookup "v1" "Service" "default" "kubernetes").items) }}
+#
+
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
    name: helm-1
 data:
-   name: Hello
-   release-name: {{ .Release.Name }}
-   chart-version: {{ .Chart.Version }}
-   file-size: {{ .Files.GetBytes "test.txt" }}
-   file-content: |
-     {{ .Files.Lines "test.txt" }}
-   #kubernetes-version: {{ .Capabilities.KubeVersion.Minor }}
-   kubernetes-version: {{ .Capabilities.KubeVersion.Major }}
-   filename: {{ .Template.Name }}
-   x: {{ quote .Values.x }}
-   env: {{ .Values.env }}
-   drink: {{ .Values.drink | default (printf "%s-tea" "Hello") }}
-   pods: |
-     {{- if (lookup "v1" "Service" "default" "kubernetes") }}
-       "yes"
-     {{ else }}
-       "not"
-     {{- end }}
-
-   test: {{ .Values.drink | default (printf "%s-tea" (lookup "v1" "Service" "default" "kubernetes").items) }}
-
-
+   cluster-ip: {{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
