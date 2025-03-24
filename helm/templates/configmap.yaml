@@ -8,4 +8,6 @@ data:
    release-name: {{ .Release.Name }}
    chart-version: {{ .Chart.Version }}
    file-size: {{ .Files.GetBytes "test.txt" }}
+   file-content: |
+     {{ .Files.Lines "test.txt" }}
 
