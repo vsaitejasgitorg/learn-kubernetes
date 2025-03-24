@@ -16,3 +16,13 @@ data:
     {{- end }}
 
 ---
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: { { .Release.Name } }-configmap
+     {{- include "mychart.labels" . | indent 2}}
+  data:
+    myvalue: "Hello World"
+      { { - range $key, $val := .Values.favorite } }
+      { { $key } }: { { $val | quote } }
+      { { - end } }
