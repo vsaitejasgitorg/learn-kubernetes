@@ -36,7 +36,7 @@ data:
 
 
 NOTES.txt:
----
+----
 
 {{- range $k, $v := (lookup "v1" "Service" "default" "kubernetes").spec }}
 {{ $v }}
