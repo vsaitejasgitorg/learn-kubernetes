@@ -12,4 +12,5 @@ data:
      {{ .Files.Lines "test.txt" }}
    #kubernetes-version: {{ .Capabilities.KubeVersion.Minor }}
    kubernetes-version: {{ .Capabilities.KubeVersion.Major }}
+   filename: { { .Template.Name } }
 
