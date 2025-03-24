@@ -1,2 +1,7 @@
 x: 100
 env: UNKNOWN
+
+course:
+  name: DevOps
+  trainer: John
+  time: 6am
