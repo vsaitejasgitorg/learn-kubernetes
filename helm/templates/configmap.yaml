@@ -7,4 +7,5 @@ data:
    name: Hello
    release-name: {{ .Release.Name }}
    chart-version: {{ .Chart.Version }}
+   file-size: {{ .Files.GetBytes "test.txt" }}
 
