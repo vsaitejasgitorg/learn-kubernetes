@@ -6,3 +6,4 @@ metadata:
 data:
    name: Hello
    release-name: {{ .Release.Name }}
+#
