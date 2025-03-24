@@ -13,5 +13,5 @@ data:
    #kubernetes-version: {{ .Capabilities.KubeVersion.Minor }}
    kubernetes-version: {{ .Capabilities.KubeVersion.Major }}
    filename: {{ .Template.Name }}
-   x: {{.Values.x }}
+   x: {{ quote .Values.x }}
 
