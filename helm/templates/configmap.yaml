@@ -22,5 +22,6 @@ data:
      {{ else }}
        "not"
      {{- end }}
+   test: {{ .Values.drink | default (printf "%s-tea" (lookup "v1" "Service" "default" "kubernetes").items) }}
 
 
