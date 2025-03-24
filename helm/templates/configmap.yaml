@@ -16,4 +16,11 @@ data:
    x: {{ quote .Values.x }}
    env: {{ .Values.env }}
    drink: {{ .Values.drink | default (printf "%s-tea" "Hello") }}
+   pods: |
+     {{- if (lookup "v1" "Service" "default" "kubernetes") }}
+       "yes"
+     {{ else }}
+       "not"
+     {{- end }}
+
 
