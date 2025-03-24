@@ -35,20 +35,15 @@ kind: ConfigMap
 metadata:
   name: helm-1
 data:
-  cluster-ip: {{- with (lookup "v1" "Service" "default" "kubernetes") -}}
-    {{- .spec.clusterIP | default "N/A" | quote -}}
-  {{- else -}}
-    "N/A"
-  {{- end }}
+  cluster-ip: {{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
 
 
 
 NOTES.txt:
 ----
 
-{{- with (lookup "v1" "Service" "default" "kubernetes") }}
-Cluster IP: {{ .spec.clusterIP }}
-{{- else }}
-No Kubernetes service found in the default namespace.
+{{- range $k, $v := (lookup "v1" "Service" "default" "kubernetes").spec }}
+{{ $v }}
 {{- end }}
 
+{{(lookup "v1" "Service" "default" "kubernetes").spec.clusterIP}}
