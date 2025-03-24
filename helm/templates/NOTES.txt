@@ -5,3 +5,7 @@ We have installed the following YAML files in Cluster
 name: {{ .name | quote }}
 trainer: {{ .trainer | quote }}
 {{- end }}
+
+{{- range $k, $v :=  .Values.course }}
+{{ $k }} : {{ $v }}
+{{- end }}
