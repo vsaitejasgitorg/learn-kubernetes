@@ -5,7 +5,7 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if($scheme = http) {
+      if($scheme = "http") {
         return 301 https://$host$request_uri;
       }
 spec:
