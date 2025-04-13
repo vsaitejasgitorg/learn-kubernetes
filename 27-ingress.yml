@@ -1,0 +1,16 @@
+metadata:
+  name: ingress-example
+  namespace: default
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: frontend-dev.saitejasroboshop.store
+        http:
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              backend:
+                service:
+                  name: frontend
+                  port:
+                    number: 80
