@@ -8,6 +8,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - frontend-dev2.saitejasroboshop.store
+    secretName: secret-tls
   rules:
     - host: frontend-dev2.saitejasroboshop.store
       http:
